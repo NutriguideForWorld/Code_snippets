@@ -47,7 +47,9 @@ How it works:
 ### 1. WARNING: [youtube] No supported JavaScript runtime could be found. Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one
 [youtube] 91v67mJgIVU: Downloading visionos player API JSON
 
-Solution:  on powershell execute following command to configure java script runtime:
+Solution:
+---
+step 1. on powershell execute following command to configure java script runtime:
 **irm https://deno.land/install.ps1 | iex**
 
 example:
@@ -59,4 +61,27 @@ irm https://deno.land/install.ps1 | iex
 Deno was installed successfully to C:\Users\Lenovo\.deno\bin\deno.exe
 Run 'deno --help' to get started
 Stuck? Join our Discord https://discord.gg/deno
+```
+Step 2: Install the External JS package for yt-dlp
+
+```bash
+pip install -U yt-dlp-ejs
+```
+
+Step 3: Update yt-dlp
+
+```bash
+pip install -U yt-dlp
+```
+
+----
+
+### 2. ERROR: You have requested merging of multiple formats but ffmpeg is not installed. Aborting due to --abort-on-error
+An error occurred during download: ERROR: You have requested merging of multiple formats but ffmpeg is not installed. Aborting due to --abort-on-error
+
+This error happens because YouTube streams high-quality video and audio separately. yt-dlp downloads both streams and then uses a tool called FFmpeg to merge them together into a single file.
+Since FFmpeg isn't installed on your system, it aborts the process. Here is how to install it based on your operating system:
+
+```bash
+winget install Gyan.FFmpeg
 ```
